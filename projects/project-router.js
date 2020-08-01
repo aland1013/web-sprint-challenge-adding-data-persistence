@@ -15,4 +15,15 @@ router.get('/', (req, res) => {
     });
 });
 
+/* ----- GET /api/projects/resources ----- */
+router.get('/resources', (req, res) => {
+  Projects.getResources()
+    .then((resources) => {
+      res.json(resources);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'Failed to get resources' });
+    });
+});
+
 module.exports = router;
