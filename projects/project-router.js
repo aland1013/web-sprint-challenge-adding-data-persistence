@@ -37,6 +37,25 @@ router.get('/tasks', (req, res) => {
     });
 });
 
+/* ----- GET /api/projects/:id/tasks ----- */
+router.get('/:id/tasks', (req, res) => {
+  const { id } = req.params;
+
+  Projects.getTasksByProjectId(id)
+    .then((tasks) => {
+      if (tasks.length) {
+        res.json(tasks);
+      } else {
+        res
+          .status(404)
+          .json({ message: 'Could not find tasks for given project' });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'Failed to get tasks' });
+    });
+});
+
 /* ----- POST /api/projects ----- */
 router.post('/', (req, res) => {
   const newProject = req.body;

@@ -6,7 +6,8 @@ module.exports = {
   getTasks,
   addProject,
   addResource,
-  addTask
+  addTask,
+  getTasksByProjectId
 };
 
 function getProjects() {
@@ -52,4 +53,8 @@ function addTask(newTask) {
     .then((id) => {
       return newTask;
     });
+}
+
+function getTasksByProjectId(id) {
+  return db('tasks').where({ 'tasks.projectId': id });
 }
