@@ -63,4 +63,17 @@ router.post('/resources', (req, res) => {
     });
 });
 
+/* ----- POST /api/projects/tasks ----- */
+router.post('/tasks', (req, res) => {
+  const newTask = req.body;
+
+  Projects.addTask(newTask)
+    .then((task) => {
+      res.status(201).json(task);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'Failed to create new task' });
+    });
+});
+
 module.exports = router;
