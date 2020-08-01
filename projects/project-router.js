@@ -37,6 +37,7 @@ router.get('/tasks', (req, res) => {
     });
 });
 
+/* ----- POST /api/projects ----- */
 router.post('/', (req, res) => {
   const newProject = req.body;
 
@@ -46,6 +47,19 @@ router.post('/', (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({ message: 'Failed to create new project' });
+    });
+});
+
+/* ----- POST /api/projects/resources ----- */
+router.post('/resources', (req, res) => {
+  const newResource = req.body;
+
+  Projects.addResource(newResource)
+    .then((resource) => {
+      res.status(201).json(resource);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'Failed to create new resource' });
     });
 });
 
